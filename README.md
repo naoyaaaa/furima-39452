@@ -39,7 +39,7 @@ Things you may want to cover:
 ## items
 
 |item_name         |string |null: false                    |
-|item_detail       |string |null: false                    |
+|item_detail       |text   |null: false                    |
 |category_id       |integer  |null: false                  |
 |condition_id      |integer|null: false                    |
 |cost_id           |integer|null: false                    |
