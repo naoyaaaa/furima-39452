@@ -18,8 +18,8 @@ class User < ApplicationRecord
   def password_complexity
     return if password.blank?
     
-    unless password.match?(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
-      errors.add(:password, "must contain at least one letter and one digit, and be at least 8 characters long")
+    unless password.match?(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)
+      errors.add(:password, "must contain at least one letter and one digit, and be at least 6 characters long")
     end
   end
 
