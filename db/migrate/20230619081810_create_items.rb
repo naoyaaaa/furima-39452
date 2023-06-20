@@ -16,8 +16,6 @@ class CreateItems < ActiveRecord::Migration[7.0]
       t.timestamps
     end
   end
-
-  validates :cotegory_id, numericality: { other_than: 1 , message: "can't be blank"}
 end
 
 

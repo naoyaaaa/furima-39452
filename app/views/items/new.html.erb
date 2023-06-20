@@ -5,10 +5,10 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with local: true do |f| %>
+    <%= form_with model: @item, url: items_path, method: :post do |f| %>
 
     <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-    <%# render 'shared/error_messages', model: f.object %>
+    <%= render 'shared/error_messages', model: f.object %>
     <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
     <%# 商品画像 %>
@@ -21,7 +21,7 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :item_image, id:"item-image" %>
+        <%= f.file_field :image, id:"item-image" %>
       </div>
     </div>
     <%# /商品画像 %>
@@ -157,3 +157,15 @@
     </p>
   </footer>
 </div>
+
+
+<% if @item.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+    <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
