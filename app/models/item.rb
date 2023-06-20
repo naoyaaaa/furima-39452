@@ -2,6 +2,13 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
+  validates :item_image, presence: true
+  validates :item_name, presence: true
+  validates :item_detail, presence: true
+  validates :price, presence: true
+  
+
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :genre
     validates :title, :text, presence: true
