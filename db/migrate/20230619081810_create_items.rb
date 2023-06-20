@@ -1,8 +1,5 @@
 class CreateItems < ActiveRecord::Migration[7.0]
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :genre
-    validates :title, :text, presence: true
-    validates :Category_id, numericality: { other_than: 1 } 
+
 
   def change
     create_table :items do |t|
