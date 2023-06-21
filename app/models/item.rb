@@ -9,9 +9,9 @@ class Item < ApplicationRecord
   validates :image, presence: true, unless: :was_attached?
 
   def was_attached?
-    self.image.attached?
+    image.attached?
   end
-  
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category, class_name: 'Category'
   belongs_to :condition, class_name: 'Condition'
@@ -19,11 +19,9 @@ class Item < ApplicationRecord
   belongs_to :region, class_name: 'Region'
   belongs_to :howmanydays, class_name: 'Howmanydays'
 
-
-
-    validates :category_id, numericality: { other_than: 1 , message: "can't be blank"} 
-    validates :condition_id, numericality: { other_than: 1 , message: "can't be blank"} 
-    validates :cost_id, numericality: { other_than: 1 , message: "can't be blank"} 
-    validates :region_id, numericality: { other_than: 1 , message: "can't be blank"} 
-    validates :howmanydays_id, numericality: { other_than: 1 , message: "can't be blank"} 
+  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :cost_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :region_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :howmanydays_id, numericality: { other_than: 1, message: "can't be blank" }
 end
