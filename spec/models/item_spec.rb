@@ -28,31 +28,31 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーが未選択だと出品できない' do
-        @item.category_id = nil
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it '商品の状態が未選択だと出品できない' do
-        @item.condition_id = nil
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
 
       it '配送料の負担が未選択だと出品できない' do
-        @item.cost_id = nil
+        @item.cost_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Cost can't be blank")
       end
 
       it '発送元の地域が未選択だと出品できない' do
-        @item.region_id = nil
+        @item.region_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Region can't be blank")
       end
 
       it '発送までの日数が未選択だと出品できない' do
-        @item.howmanydays_id = nil
+        @item.howmanydays_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Howmanydays can't be blank")
       end
@@ -73,6 +73,24 @@ RSpec.describe Item, type: :model do
         @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+      end
+
+      it '商品説明が空だと出品できない' do
+        @item.item_detail = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item detail can't be blank")
+      end
+
+      it '価格に半角数字以外が含まれている場合は出品できない' do
+        @item.price = "あ"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it 'userが紐づいてなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end
