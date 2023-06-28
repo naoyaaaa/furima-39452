@@ -128,10 +128,10 @@
     </div>
 
     <ul class='item-lists'>  
-       <%= link_to "#" do %>
         <% @items.each do |item| %>
       
          <li class='list'>
+              <%= link_to item_path(item) do %>
         <div class='item-img-content' style="background-image: url(<%= item.image %>);">
           <%= image_tag item.image, class: "item-img" %>
 
