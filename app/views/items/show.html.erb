@@ -23,19 +23,19 @@
       </span>
     </div>
 
-    <%  if current_user == @item.user %> 
+    <%  if user_signed_in? && current_user == @item.user %> 
 
     <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
 
-     <% end %>
+     <% else %>
 
     <%# unless @item.sold %>
      <%# if current_user =! @item.user %> 
   
     <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
-    <%# end %>
+    <% end %>
 
 
    
@@ -82,7 +82,6 @@
       </div>
     </div>
   </div>
-  <%# /商品の概要 %>
 
   <div class="comment-box">
     <form>
