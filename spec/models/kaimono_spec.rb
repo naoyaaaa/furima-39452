@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Kaimono, type: :model do
   before do
-    @kaimono = FactoryBot.build(:kaimono)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item, user: user)
+    @kaimono = FactoryBot.build(:kaimono, user_id: user.id, item_id: item.id)
+    sleep(1)
   end
 
   describe '商品購入機能' do
@@ -11,6 +14,7 @@ RSpec.describe Kaimono, type: :model do
         expect(@kaimono).to be_valid
       end
     end
+    
     context '商品購入できないとき' do
       it '郵便番号が空では登録できない' do
         @kaimono.postal_code = ''
@@ -58,6 +62,30 @@ RSpec.describe Kaimono, type: :model do
         @kaimono.token = nil
         @kaimono.valid?
         expect(@kaimono.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it '電話番号が12桁以上では登録できない' do
+        @kaimono.phone_number = '123456789012'
+        @kaimono.valid?
+        expect(@kaimono.errors.full_messages).to include('Phone number is invalid. Phone number should be 10 to 11 digits.')
+      end
+
+      it '電話番号に半角数字以外が含まれている場合は登録できない' do
+        @kaimono.phone_number = '1234abcd56'
+        @kaimono.valid?
+        expect(@kaimono.errors.full_messages).to include('Phone number is invalid. Phone number should be 10 to 11 digits.')
+      end
+
+      it 'userが紐付いていなければ登録できない' do
+        @kaimono.user_id = nil
+        @kaimono.valid?
+        expect(@kaimono.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐付いていなければ登録できない' do
+        @kaimono.item_id = nil
+        @kaimono.valid?
+        expect(@kaimono.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
