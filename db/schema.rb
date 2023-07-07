@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_07_024611) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_30_074645) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -99,4 +99,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_024611) do
   add_foreign_key "items", "users"
   add_foreign_key "purchase_logs", "items"
   add_foreign_key "purchase_logs", "users"
+  add_foreign_key "shipping_addresses", "purchase_logs"
 end
