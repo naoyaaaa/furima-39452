@@ -90,3 +90,9 @@ gem 'faker'
 gem 'faker-japanese'
 
 gem 'active_hash'
+
+gem 'payjp'
+
+gem 'pry-rails'
+
+gem 'gon'

@@ -7,7 +7,7 @@ RSpec.describe Kaimono, type: :model do
 
   describe '商品購入機能' do
     context '商品購入できる場合' do
-      it '郵便番号と都道府県と市町村と番地と電話番号とuser_id,item_idが存在すれば登録できる' do
+      it 'tokenと郵便番号と都道府県と市町村と番地と電話番号とuser_id,item_idが存在すれば登録できる' do
         expect(@kaimono).to be_valid
       end
     end
@@ -52,6 +52,12 @@ RSpec.describe Kaimono, type: :model do
         @kaimono.phone_number = '123456789'
         @kaimono.valid?
         expect(@kaimono.errors.full_messages).to include("Phone number is invalid. Phone number should be 10 to 11 digits.")
+      end
+
+      it "tokenが空では登録できないこと" do
+        @kaimono.token = nil
+        @kaimono.valid?
+        expect(@kaimono.errors.full_messages).to include("Token can't be blank")
       end
     end    
   end

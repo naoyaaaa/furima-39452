@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return unless current_user != @item.user
+    return unless current_user != @item.user|| @item.purchase_log != nil
 
     redirect_to root_path
   end
@@ -39,14 +39,23 @@ class ItemsController < ApplicationController
   def destroy
     item = Item.find(params[:id])
 
-    if item.user != current_user
+    if item.user != current_user 
       redirect_to root_path
       return
+    end
+    
+    purchase_log = item.purchase_log
+    if purchase_log.present?
+      shipping_address = purchase_log.shipping_address
+      shipping_address.destroy if shipping_address.present?
+      purchase_log.destroy
     end
 
     item.destroy
     redirect_to root_path
   end
+
+  
 
   private
 
