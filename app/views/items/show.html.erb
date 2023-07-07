@@ -25,7 +25,7 @@
       </span>
     </div>
 
-    <%  if user_signed_in? && current_user == @item.user  %> 
+    <%  if user_signed_in? && current_user == @item.user && @item.purchase_log == nil  %> 
 
     <%= link_to "商品の編集", edit_item_path, data: {turbo: false}, method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
