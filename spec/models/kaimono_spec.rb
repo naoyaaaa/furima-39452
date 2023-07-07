@@ -29,7 +29,7 @@ RSpec.describe Kaimono, type: :model do
       end
 
       it '都道府県が空では登録できない' do
-        @kaimono.region_id = ''
+        @kaimono.region_id = 0
         @kaimono.valid?
         expect(@kaimono.errors.full_messages).to include("Region can't be blank")
       end
