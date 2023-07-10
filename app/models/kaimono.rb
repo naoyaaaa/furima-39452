@@ -11,7 +11,7 @@ class Kaimono
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Phone number should be 10 to 11 digits.' }
     validates :token
   end
-  validates :region_id, numericality: { other_than: 0, message: "can't be blank" }
+  validates :region_id, numericality: { other_than: 1, message: "can't be blank" }
 
   def save
     purchase_log = PurchaseLog.create(item_id:, user_id:)
